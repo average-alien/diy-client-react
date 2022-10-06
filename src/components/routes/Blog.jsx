@@ -48,7 +48,11 @@ export default function Blog() {
 
             {/* map comments possibly with comment component */}
 
-            <Link to={`/blogs/${blog._id}/edit`}>Edit Post</Link>
+            <Link to={`/blogs/${blog._id}/edit`}>
+                <button>
+                    Edit Post
+                </button>
+            </Link>
 
             <button onClick={handleDelete}>Delete Post</button>
         </div>
