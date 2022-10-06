@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 export default function Blog() {
@@ -7,6 +7,7 @@ export default function Blog() {
     const [errorMessage, setErrorMessage] = useState('')
 
     const { id } = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchBlog = async () => {
@@ -23,6 +24,18 @@ export default function Blog() {
         fetchBlog()
     }, [id])
 
+    const handleDelete = async () => {
+        try {
+            await axios.delete(`${process.env.REACT_APP_SERVER_URL}/blogs/${blog._id}`)
+            navigate('/')
+        } catch (error) {
+            console.warn(error)
+            if (error.response) {
+                setErrorMessage(error.response.data.message)
+            }
+        }
+    }
+
     return (
         <div>
             <p>{errorMessage}</p>
@@ -36,6 +49,8 @@ export default function Blog() {
             {/* map comments possibly with comment component */}
 
             <Link to={`/blogs/${blog._id}/edit`}>Edit Post</Link>
+
+            <button onClick={handleDelete}>Delete Post</button>
         </div>
     )
 }
