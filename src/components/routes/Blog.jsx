@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import Comment from '../partials/Comment'
 
 export default function Blog() {
     const [blog, setBlog] = useState({})
@@ -40,14 +41,6 @@ export default function Blog() {
         <div>
             <p>{errorMessage}</p>
 
-            <h1>{blog.title}</h1>
-
-            <h3>By: {blog.author}</h3>
-
-            <p>{blog.content}</p>
-
-            {/* map comments possibly with comment component */}
-
             <Link to={`/blogs/${blog._id}/edit`}>
                 <button>
                     Edit Post
@@ -55,6 +48,18 @@ export default function Blog() {
             </Link>
 
             <button onClick={handleDelete}>Delete Post</button>
+
+            <h1>{blog.title}</h1>
+
+            <h3>By: {blog.author}</h3>
+
+            <p>{blog.content}</p>
+
+            {/* map comments possibly with comment component */}
+            <Comment
+                comments={blog.comments}
+                blogId={blog._id}
+            />
         </div>
     )
 }
