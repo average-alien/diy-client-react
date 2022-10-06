@@ -21,10 +21,12 @@ export default function Blog() {
             }
         }
         fetchBlog()
-    }, [])
+    }, [id])
 
     return (
         <div>
+            <p>{errorMessage}</p>
+
             <h1>{blog.title}</h1>
 
             <h3>By: {blog.author}</h3>
