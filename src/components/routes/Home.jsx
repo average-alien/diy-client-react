@@ -29,7 +29,7 @@ export default function Home() {
 
             {blogs.map(blog => {
                 return (
-                    <h2>
+                    <h2 key={blog._id}>
                         <Link to={`/blogs/${blog._id}`}>{blog.title}</Link>
                     </h2>
                 )
