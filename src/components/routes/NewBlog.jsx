@@ -1,7 +1,7 @@
-import BlogForm from "../partials/BlogForm"
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
+import BlogForm from "../partials/BlogForm"
 
 export default function NewBlog() {
     const [newBlog, setNewBlog] = useState({
